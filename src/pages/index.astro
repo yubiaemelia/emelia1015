@@ -1,16 +1,371 @@
----
----
-
-<html lang="en">
+<!doctype html>
+<html lang="en" class="dark">
 	<head>
-		<meta charset="utf-8" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Emelia Yubia | Colorful Portfolio</title>
+
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+
+		<style type="text/tailwindcss">
+			@custom-variant dark (&:where(.dark, .dark *));
+
+			@layer components {
+				.btn-primary {
+					@apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 px-6 py-3 font-bold text-white shadow-lg shadow-fuchsia-500/20 transition duration-300 hover:-translate-y-1 hover:shadow-xl;
+				}
+
+				.btn-secondary {
+					@apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-bold text-white shadow-lg shadow-cyan-500/20 transition duration-300 hover:-translate-y-1 hover:shadow-xl;
+				}
+
+				.btn-accent {
+					@apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-6 py-3 font-bold text-slate-950 shadow-lg shadow-orange-500/20 transition duration-300 hover:-translate-y-1 hover:shadow-xl;
+				}
+
+				.form-input {
+					@apply w-full rounded-xl border border-violet-200 bg-white/70 p-4 outline-none transition duration-300 focus:border-fuchsia-500 focus:ring-4 focus:ring-fuchsia-500/15 dark:border-violet-800 dark:bg-slate-900/70;
+				}
+
+				.section-title {
+					@apply mb-5 text-3xl font-extrabold tracking-tight md:text-4xl;
+				}
+
+				.color-card {
+					@apply rounded-3xl border border-white/50 bg-white/75 shadow-xl shadow-violet-950/5 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/70;
+				}
+			}
+
+			html {
+				scroll-behavior: smooth;
+			}
+
+			body {
+				background-image:
+					radial-gradient(ellipse at 10% 5%, rgba(217, 70, 239, 0.13), transparent 32%),
+					radial-gradient(ellipse at 90% 18%, rgba(34, 211, 238, 0.12), transparent 30%),
+					radial-gradient(ellipse at 70% 85%, rgba(251, 191, 36, 0.10), transparent 28%);
+			}
+
+			.gradient-text {
+				background: linear-gradient(90deg, #a78bfa, #f472b6, #22d3ee);
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+
+			.orb {
+				position: absolute;
+				border-radius: 9999px;
+				filter: blur(1px);
+				pointer-events: none;
+				opacity: 0.65;
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				html {
+					scroll-behavior: auto;
+				}
+
+				*,
+				*::before,
+				*::after {
+					animation-duration: 0.01ms !important;
+					transition-duration: 0.01ms !important;
+				}
+			}
+		</style>
 	</head>
-	<body>
-		<h1>Astro</h1>
+
+	<body class="min-h-screen overflow-x-hidden bg-slate-50 text-slate-800 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
+		<div class="orb left-[-70px] top-64 h-40 w-40 bg-fuchsia-400/30"></div>
+		<div class="orb right-[-55px] top-[650px] h-48 w-48 bg-cyan-400/25"></div>
+
+		<header class="relative z-10 px-5 py-6 md:px-12">
+			<nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-5 rounded-2xl border border-white/60 bg-white/70 px-5 py-4 shadow-lg shadow-violet-950/5 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/70">
+				<a href="#home" class="text-2xl font-black tracking-tight gradient-text md:text-3xl">
+					@shekyutt
+				</a>
+
+				<ul class="flex flex-wrap items-center gap-4 font-semibold md:gap-7">
+					<li><a class="nav-link transition hover:text-fuchsia-500" href="#projects">Projects</a></li>
+					<li><a class="nav-link transition hover:text-cyan-500" href="#services">Services</a></li>
+					<li><a class="nav-link transition hover:text-amber-500" href="#contact">Contact</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<div class="relative z-10 mx-auto flex max-w-6xl flex-wrap justify-center gap-3 px-5 py-3">
+			<button id="switch" type="button" class="btn-primary" aria-pressed="true">
+				✦ Switch Theme
+			</button>
+
+			<button id="toggledark" type="button" class="btn-secondary" aria-pressed="true">
+				☾ Toggle Dark
+			</button>
+		</div>
+
+		<main id="home" class="relative z-10 mx-auto max-w-6xl px-5 md:px-12">
+			<section class="hero-section relative overflow-hidden rounded-[2rem] py-16 text-center md:py-24">
+				<div class="absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-br from-violet-100 via-pink-50 to-cyan-100 dark:from-violet-950/70 dark:via-slate-900 dark:to-cyan-950/50"></div>
+				<div class="absolute left-[12%] top-12 h-3 w-3 rounded-full bg-fuchsia-500"></div>
+				<div class="absolute right-[15%] top-24 h-4 w-4 rounded-full bg-cyan-400"></div>
+				<div class="absolute bottom-16 left-[20%] h-5 w-5 rounded-full bg-amber-400"></div>
+
+				<p class="hero-welcome mb-5 inline-flex items-center gap-2 rounded-full border border-fuchsia-300/60 bg-white/70 px-4 py-2 text-xs font-extrabold uppercase tracking-[.22em] text-fuchsia-700 dark:border-fuchsia-500/30 dark:bg-slate-950/50 dark:text-fuchsia-300">
+					<span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+					Welcome to my portfolio
+				</p>
+
+				<h1 class="hero-heading text-4xl font-black leading-tight tracking-tight md:text-6xl">
+					Hello, I'm <span class="gradient-text">Emelia Yubia</span>
+				</h1>
+
+				<p class="hero-description mx-auto mt-6 max-w-2xl px-3 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+					I am passionate about web development, information systems, and creating digital solutions that help people and businesses.
+				</p>
+
+				<a href="#projects" class="hero-button btn-primary mt-8">
+					Explore My Projects <span aria-hidden="true">↗</span>
+				</a>
+
+				<div class="mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-3 px-4 sm:grid-cols-3">
+					<div class="rounded-2xl border border-violet-200/70 bg-white/65 p-4 dark:border-violet-400/15 dark:bg-slate-950/40">
+						<div class="text-2xl">💜</div>
+						<p class="mt-1 font-bold">Creative Design</p>
+					</div>
+					<div class="rounded-2xl border border-cyan-200/70 bg-white/65 p-4 dark:border-cyan-400/15 dark:bg-slate-950/40">
+						<div class="text-2xl">💻</div>
+						<p class="mt-1 font-bold">Web Development</p>
+					</div>
+					<div class="rounded-2xl border border-amber-200/70 bg-white/65 p-4 dark:border-amber-400/15 dark:bg-slate-950/40">
+						<div class="text-2xl">✨</div>
+						<p class="mt-1 font-bold">Smart Solutions</p>
+					</div>
+				</div>
+			</section>
+
+			<section id="projects" class="content-section scroll-mt-8 py-14 md:py-16">
+				<div class="mb-7 flex flex-wrap items-end justify-between gap-4">
+					<div>
+						<p class="mb-2 text-sm font-extrabold uppercase tracking-[.2em] text-fuchsia-500">What I create</p>
+						<h2 class="section-title gradient-text">My Projects</h2>
+					</div>
+					<span class="rounded-full bg-fuchsia-100 px-4 py-2 text-sm font-bold text-fuchsia-700 dark:bg-fuchsia-500/15 dark:text-fuchsia-300">
+						Ideas into reality
+					</span>
+				</div>
+
+				<div class="color-card project-card p-7 md:p-9">
+					<div class="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-fuchsia-500 to-violet-600 text-2xl text-white shadow-lg shadow-fuchsia-500/20">
+						✦
+					</div>
+					<p class="max-w-3xl leading-8 text-slate-600 dark:text-slate-300">
+						Personal portfolio, payroll system, company website, startup website, and compliance monitoring system. These projects demonstrate my interest in building practical and useful digital solutions.
+					</p>
+					<div class="mt-6 flex flex-wrap gap-2">
+						<span class="rounded-full bg-violet-100 px-3 py-1 text-sm font-semibold text-violet-700 dark:bg-violet-500/15 dark:text-violet-300">Portfolio</span>
+						<span class="rounded-full bg-cyan-100 px-3 py-1 text-sm font-semibold text-cyan-700 dark:bg-cyan-500/15 dark:text-cyan-300">Websites</span>
+						<span class="rounded-full bg-amber-100 px-3 py-1 text-sm font-semibold text-amber-700 dark:bg-amber-500/15 dark:text-amber-300">Information Systems</span>
+					</div>
+				</div>
+			</section>
+
+			<section id="services" class="content-section scroll-mt-8 py-14 md:py-16">
+				<p class="mb-2 text-sm font-extrabold uppercase tracking-[.2em] text-cyan-500">How I can help</p>
+				<h2 class="section-title">My <span class="gradient-text">Services</span></h2>
+				<p class="mb-8 max-w-3xl leading-8 text-slate-600 dark:text-slate-300">
+					I focus on website creation, system development, AI automation, database management, project management, and systems analysis.
+				</p>
+
+				<ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+					<li class="service-card color-card flex items-center gap-4 p-5 transition duration-300 hover:-translate-y-1">
+						<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-fuchsia-500 to-pink-500 text-xl text-white">01</span>
+						<span class="font-bold">Website Creation</span>
+					</li>
+					<li class="service-card color-card flex items-center gap-4 p-5 transition duration-300 hover:-translate-y-1">
+						<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 text-xl text-white">02</span>
+						<span class="font-bold">System Development</span>
+					</li>
+					<li class="service-card color-card flex items-center gap-4 p-5 transition duration-300 hover:-translate-y-1">
+						<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 text-xl text-white">03</span>
+						<span class="font-bold">AI Automation</span>
+					</li>
+					<li class="service-card color-card flex items-center gap-4 p-5 transition duration-300 hover:-translate-y-1">
+						<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-xl text-white">04</span>
+						<span class="font-bold">Database Management</span>
+					</li>
+					<li class="service-card color-card flex items-center gap-4 p-5 transition duration-300 hover:-translate-y-1">
+						<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 text-xl text-white">05</span>
+						<span class="font-bold">Project Management</span>
+					</li>
+					<li class="service-card color-card flex items-center gap-4 p-5 transition duration-300 hover:-translate-y-1">
+						<span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-500 to-red-600 text-xl text-white">06</span>
+						<span class="font-bold">Systems Analysis</span>
+					</li>
+				</ul>
+			</section>
+
+			<section id="contact" class="content-section scroll-mt-8 py-14 md:py-16">
+				<div class="grid gap-8 md:grid-cols-[.8fr_1.2fr] md:items-start">
+					<div>
+						<p class="mb-2 text-sm font-extrabold uppercase tracking-[.2em] text-amber-500">Say hello</p>
+						<h2 class="section-title">Let's Build <span class="gradient-text">Together!</span></h2>
+						<p class="max-w-md leading-8 text-slate-600 dark:text-slate-300">
+							Have a question or project idea? Send me a message using the form. I would love to hear from you.
+						</p>
+						<div class="mt-6 inline-flex items-center gap-3 rounded-2xl bg-emerald-100 px-4 py-3 font-semibold text-emerald-800 dark:bg-emerald-500/10 dark:text-emerald-300">
+							<span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+							Open to creative ideas
+						</div>
+					</div>
+
+					<form id="contactForm" class="color-card flex flex-col gap-5 p-6 md:p-8" action="#" method="get">
+						<div>
+							<label for="name" class="mb-2 block font-semibold">Name</label>
+							<input id="name" name="name" type="text" placeholder="Enter your name" autocomplete="name" required maxlength="100" class="form-input" />
+						</div>
+						<div>
+							<label for="email" class="mb-2 block font-semibold">Email</label>
+							<input id="email" name="email" type="email" placeholder="Enter your email" autocomplete="email" required maxlength="254" class="form-input" />
+						</div>
+						<div>
+							<label for="message" class="mb-2 block font-semibold">Message</label>
+							<textarea id="message" name="message" rows="5" required maxlength="2000" placeholder="Write your message here..." class="form-input resize-y"></textarea>
+						</div>
+						<button type="submit" class="btn-accent self-start">
+							Send Message <span aria-hidden="true">↗</span>
+						</button>
+						<p id="formNotice" role="status" aria-live="polite" class="text-sm text-emerald-600 dark:text-emerald-300"></p>
+					</form>
+				</div>
+			</section>
+		</main>
+
+		<footer class="relative z-10 mt-10 border-t border-violet-200/70 px-5 py-8 text-center dark:border-white/10">
+			<p class="font-semibold text-slate-600 dark:text-slate-400">
+				&copy; 2026 Emelia Yubia. All rights reserved.
+			</p>
+			<a href="#home" class="mt-3 inline-block font-bold text-violet-600 transition hover:text-fuchsia-500 dark:text-violet-300">
+				Back to Top ↑
+			</a>
+		</footer>
+
+		<script is:inline>
+			console.log("GSAP Version:", gsap.version);
+
+			const html = document.documentElement;
+			const switchButton = document.querySelector("#switch");
+			const toggleDarkButton = document.querySelector("#toggledark");
+			const contactForm = document.querySelector("#contactForm");
+			const formNotice = document.querySelector("#formNotice");
+
+			gsap.from(".hero-welcome", {
+				y: 24,
+				opacity: 0,
+				duration: 0.8,
+				ease: "power3.out",
+				delay: 0.15
+			});
+
+			gsap.fromTo(
+				".hero-heading",
+				{ scale: 0.82, opacity: 0, y: 18 },
+				{
+					scale: 1,
+					opacity: 1,
+					y: 0,
+					duration: 1.1,
+					ease: "back.out(1.5)",
+					delay: 0.2
+				}
+			);
+
+			gsap.to(".orb", {
+				y: 35,
+				x: 12,
+				duration: 3,
+				repeat: -1,
+				yoyo: true,
+				ease: "sine.inOut",
+				stagger: 0.5
+			});
+
+			const portfolioTimeline = gsap.timeline({
+				defaults: { ease: "power3.out" },
+				delay: 0.15
+			});
+
+			portfolioTimeline
+				.from(".nav-link", {
+					y: -16,
+					opacity: 0,
+					duration: 0.5,
+					stagger: 0.12
+				}, 0)
+				.from(".hero-description", {
+					y: 20,
+					opacity: 0,
+					duration: 0.7
+				}, 0.35)
+				.from(".hero-button", {
+					y: 18,
+					opacity: 0,
+					scale: 0.92,
+					duration: 0.65,
+					ease: "back.out(1.4)"
+				}, 0.55)
+				.from(".hero-section .grid > div", {
+					y: 18,
+					opacity: 0,
+					duration: 0.5,
+					stagger: 0.12
+				}, 0.7);
+
+			gsap.from(".content-section", {
+				y: 28,
+				opacity: 0,
+				duration: 0.8,
+				stagger: 0.18,
+				ease: "power2.out",
+				delay: 0.35
+			});
+
+			function toggleTheme(event) {
+				const isDark = html.classList.toggle("dark");
+
+				switchButton.setAttribute("aria-pressed", String(isDark));
+				toggleDarkButton.setAttribute("aria-pressed", String(isDark));
+
+				gsap.timeline()
+					.to(event.currentTarget, {
+						rotation: "+=180",
+						scale: 1.08,
+						duration: 0.35,
+						ease: "power2.inOut"
+					})
+					.to(event.currentTarget, {
+						scale: 1,
+						duration: 0.2,
+						ease: "power2.out"
+					});
+			}
+
+			switchButton.addEventListener("click", toggleTheme);
+			toggleDarkButton.addEventListener("click", toggleTheme);
+
+			contactForm.addEventListener("submit", function (event) {
+				event.preventDefault();
+
+				if (!contactForm.reportValidity()) return;
+
+				formNotice.textContent =
+					"Your form is valid! Connect a backend or email service to send your message.";
+			});
+		</script>
 	</body>
 </html>
