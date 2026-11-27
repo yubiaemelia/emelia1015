@@ -104,8 +104,8 @@
 				✦ Switch Theme
 			</button>
 
-			<button id="toggledark" type="button" class="btn-secondary" aria-pressed="true">
-				☾ Toggle Dark
+			<button id="replay" type="button" class="btn-secondary" aria-label="Replay portfolio animations">
+				↻ Replay Animations
 			</button>
 		</div>
 
@@ -260,11 +260,11 @@
 
 			const html = document.documentElement;
 			const switchButton = document.querySelector("#switch");
-			const toggleDarkButton = document.querySelector("#toggledark");
+			const replayButton = document.querySelector("#replay");
 			const contactForm = document.querySelector("#contactForm");
 			const formNotice = document.querySelector("#formNotice");
 
-			gsap.from(".hero-welcome", {
+			const welcomeAnimation = gsap.from(".hero-welcome", {
 				y: 24,
 				opacity: 0,
 				duration: 0.8,
@@ -272,7 +272,7 @@
 				delay: 0.15
 			});
 
-			gsap.fromTo(
+			const headingAnimation = gsap.fromTo(
 				".hero-heading",
 				{ scale: 0.82, opacity: 0, y: 18 },
 				{
@@ -285,7 +285,7 @@
 				}
 			);
 
-			gsap.to(".orb", {
+			const orbAnimation = gsap.to(".orb", {
 				y: 35,
 				x: 12,
 				duration: 3,
@@ -326,7 +326,7 @@
 					stagger: 0.12
 				}, 0.7);
 
-			gsap.from(".content-section", {
+			const sectionsAnimation = gsap.from(".content-section", {
 				y: 28,
 				opacity: 0,
 				duration: 0.8,
@@ -339,7 +339,6 @@
 				const isDark = html.classList.toggle("dark");
 
 				switchButton.setAttribute("aria-pressed", String(isDark));
-				toggleDarkButton.setAttribute("aria-pressed", String(isDark));
 
 				gsap.timeline()
 					.to(event.currentTarget, {
@@ -355,8 +354,16 @@
 					});
 			}
 
+			function replayAnimations() {
+				welcomeAnimation.restart();
+				headingAnimation.restart();
+				orbAnimation.restart();
+				portfolioTimeline.restart();
+				sectionsAnimation.restart();
+			}
+
 			switchButton.addEventListener("click", toggleTheme);
-			toggleDarkButton.addEventListener("click", toggleTheme);
+			replayButton.addEventListener("click", replayAnimations);
 
 			contactForm.addEventListener("submit", function (event) {
 				event.preventDefault();
