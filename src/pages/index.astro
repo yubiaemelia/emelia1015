@@ -9,37 +9,8 @@
 		<title>Emelia Yubia | Colorful Portfolio</title>
 
 		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-		<script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
 
-		<style type="text/tailwindcss">
-			@custom-variant dark (&:where(.dark, .dark *));
-
-			@layer components {
-				.btn-primary {
-					@apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500 px-6 py-3 font-bold text-white shadow-lg shadow-fuchsia-500/20 transition duration-300 hover:-translate-y-1 hover:shadow-xl;
-				}
-
-				.btn-secondary {
-					@apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-bold text-white shadow-lg shadow-cyan-500/20 transition duration-300 hover:-translate-y-1 hover:shadow-xl;
-				}
-
-				.btn-accent {
-					@apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-6 py-3 font-bold text-slate-950 shadow-lg shadow-orange-500/20 transition duration-300 hover:-translate-y-1 hover:shadow-xl;
-				}
-
-				.form-input {
-					@apply w-full rounded-xl border border-violet-200 bg-white/70 p-4 outline-none transition duration-300 focus:border-fuchsia-500 focus:ring-4 focus:ring-fuchsia-500/15 dark:border-violet-800 dark:bg-slate-900/70;
-				}
-
-				.section-title {
-					@apply mb-5 text-3xl font-extrabold tracking-tight md:text-4xl;
-				}
-
-				.color-card {
-					@apply rounded-3xl border border-white/50 bg-white/75 shadow-xl shadow-violet-950/5 backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/70;
-				}
-			}
-
+		<style>
 			html {
 				scroll-behavior: smooth;
 			}
@@ -66,6 +37,44 @@
 				opacity: 0.65;
 			}
 
+			.form-input {
+				width: 100%;
+				border: 1px solid #ddd6fe;
+				border-radius: 0.75rem;
+				background: rgba(255, 255, 255, 0.7);
+				padding: 1rem;
+				outline: none;
+				transition: border-color 300ms, box-shadow 300ms;
+			}
+
+			.form-input:focus {
+				border-color: #d946ef;
+				box-shadow: 0 0 0 4px rgba(217, 70, 239, 0.15);
+			}
+
+			.section-title {
+				margin-bottom: 1.25rem;
+				font-size: 1.875rem;
+				font-weight: 800;
+				letter-spacing: -0.025em;
+				line-height: 2.25rem;
+			}
+
+			.color-card {
+				border: 1px solid rgba(255, 255, 255, 0.5);
+				border-radius: 1.5rem;
+				background: rgba(255, 255, 255, 0.75);
+				box-shadow: 0 20px 25px -5px rgba(46, 16, 101, 0.05), 0 8px 10px -6px rgba(46, 16, 101, 0.05);
+				backdrop-filter: blur(16px);
+			}
+
+			@media (min-width: 768px) {
+				.section-title {
+					font-size: 2.25rem;
+					line-height: 2.5rem;
+				}
+			}
+
 			@media (prefers-reduced-motion: reduce) {
 				html {
 					scroll-behavior: auto;
@@ -77,6 +86,99 @@
 					animation-duration: 0.01ms !important;
 					transition-duration: 0.01ms !important;
 				}
+			}
+		</style>
+		<style is:global>
+			html.dark body {
+				background-color: #020617;
+				color: #f1f5f9;
+			}
+
+			html.dark header nav,
+			html.dark .color-card {
+				background-color: rgba(15, 23, 42, 0.84);
+				border-color: rgba(255, 255, 255, 0.12);
+			}
+
+			html.dark .hero-section > div:first-child {
+				background: linear-gradient(135deg, rgba(76, 29, 149, 0.72), rgba(15, 23, 42, 0.92), rgba(8, 145, 178, 0.45));
+			}
+
+			html.dark .hero-welcome {
+				background-color: rgba(2, 6, 23, 0.7);
+				border-color: rgba(217, 70, 239, 0.3);
+				color: #e9d5ff;
+			}
+
+			html.dark .hero-description,
+			html.dark .project-card p,
+			html.dark #services > p:not(:first-child),
+			html.dark #contact .max-w-md,
+			html.dark footer p {
+				color: #cbd5e1;
+			}
+
+			html.dark .form-input {
+				background-color: #0f172a;
+				border-color: #5b21b6;
+				color: #f1f5f9;
+			}
+
+			html.dark .form-input::placeholder {
+				color: #94a3b8;
+			}
+
+			html.dark footer {
+				border-color: rgba(255, 255, 255, 0.12);
+			}
+
+			header nav ul .nav-link {
+				color: #334155;
+				opacity: 1 !important;
+				text-decoration: none;
+			}
+
+			html.dark header nav ul .nav-link {
+				color: #f1f5f9;
+			}
+
+			.btn-primary,
+			.btn-secondary,
+			.btn-accent {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.5rem;
+				border: 0;
+				border-radius: 9999px;
+				padding: 0.75rem 1.5rem;
+				font-weight: 700;
+				cursor: pointer;
+				transition: transform 300ms, box-shadow 300ms;
+			}
+
+			.btn-primary:hover,
+			.btn-secondary:hover,
+			.btn-accent:hover {
+				transform: translateY(-0.25rem);
+			}
+
+			.btn-primary {
+				background: linear-gradient(90deg, #7c3aed, #d946ef, #ec4899);
+				box-shadow: 0 10px 24px rgba(217, 70, 239, 0.2);
+				color: #fff;
+			}
+
+			.btn-secondary {
+				background: linear-gradient(90deg, #06b6d4, #2563eb);
+				box-shadow: 0 10px 24px rgba(34, 211, 238, 0.2);
+				color: #fff;
+			}
+
+			.btn-accent {
+				background: linear-gradient(90deg, #fbbf24, #f97316);
+				box-shadow: 0 10px 24px rgba(249, 115, 22, 0.2);
+				color: #020617;
 			}
 		</style>
 	</head>
@@ -94,6 +196,7 @@
 				<ul class="flex flex-wrap items-center gap-4 font-semibold md:gap-7">
 					<li><a class="nav-link transition hover:text-fuchsia-500" href="#projects">Projects</a></li>
 					<li><a class="nav-link transition hover:text-cyan-500" href="#services">Services</a></li>
+					<li><a class="nav-link transition hover:text-amber-500" href="#about">About</a></li>
 					<li><a class="nav-link transition hover:text-amber-500" href="#contact">Contact</a></li>
 				</ul>
 			</nav>
@@ -110,7 +213,7 @@
 		</div>
 
 		<main id="home" class="relative z-10 mx-auto max-w-6xl px-5 md:px-12">
-			<section class="hero-section relative overflow-hidden rounded-[2rem] py-16 text-center md:py-24">
+			<section id="about" class="hero-section relative overflow-hidden rounded-[2rem] py-16 text-center md:py-24">
 				<div class="absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-br from-violet-100 via-pink-50 to-cyan-100 dark:from-violet-950/70 dark:via-slate-900 dark:to-cyan-950/50"></div>
 				<div class="absolute left-[12%] top-12 h-3 w-3 rounded-full bg-fuchsia-500"></div>
 				<div class="absolute right-[15%] top-24 h-4 w-4 rounded-full bg-cyan-400"></div>
@@ -255,8 +358,8 @@
 			</a>
 		</footer>
 
-		<script is:inline>
-			console.log("GSAP Version:", gsap.version);
+		<script>
+			import { gsap } from "gsap";
 
 			const html = document.documentElement;
 			const switchButton = document.querySelector("#switch");
